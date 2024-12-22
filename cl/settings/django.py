@@ -191,7 +191,7 @@ if DEVELOPMENT:
     if not TESTING:
         MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
-
+# TODO: Start by putting Tailwind in the simple_pages app, evaluate moving
 TAILWIND_APP_NAME = "cl.simple_pages"
 TAILWIND_CSS_PATH = "css/tailwind_styles.css"
 
