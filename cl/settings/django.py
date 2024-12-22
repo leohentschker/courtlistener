@@ -187,6 +187,7 @@ INSTALLED_APPS = [
 
 if DEVELOPMENT:
     INSTALLED_APPS.append("django_extensions")
+    INSTALLED_APPS.append("django_browser_reload")
     MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
     if not TESTING:
         MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
