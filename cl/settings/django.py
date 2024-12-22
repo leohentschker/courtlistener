@@ -187,12 +187,14 @@ INSTALLED_APPS = [
 
 if DEVELOPMENT:
     INSTALLED_APPS.append("django_extensions")
+
+    # used to hot reload css changes
     INSTALLED_APPS.append("django_browser_reload")
     MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
     if not TESTING:
         MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
 
-# TODO: Start by putting Tailwind in the simple_pages app, evaluate moving
+# TODO: Shift to a global Tailwind config and pull out of simple_pages app
 TAILWIND_APP_NAME = "cl.simple_pages"
 TAILWIND_CSS_PATH = "css/tailwind_styles.css"
 
