@@ -182,11 +182,18 @@ INSTALLED_APPS = [
     "cl.stats",
     "cl.users",
     "cl.visualizations",
+    "tailwind",
 ]
 
 if DEVELOPMENT:
     INSTALLED_APPS.append("django_extensions")
-    MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+    MIDDLEWARE.append("django_browser_reload.middleware.BrowserReloadMiddleware")
+    if not TESTING:
+        MIDDLEWARE.append("debug_toolbar.middleware.DebugToolbarMiddleware")
+
+
+TAILWIND_APP_NAME = "cl.simple_pages"
+TAILWIND_CSS_PATH = "css/tailwind_styles.css"
 
 ASGI_APPLICATION = "cl.asgi.application"
 
