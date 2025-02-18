@@ -6,15 +6,40 @@
 {% tailwind_css %}
 {% tailwind_preload_css %}
 
+<!-- To be replaced by self-hosted version -->
+<script  src="{% static 'js/vue.runtime.global.prod.min.js' %}" defer init nonce="{{ request.csp_nonce }}"
+></script>
+<script nonce="{{ request.csp_nonce }}" defer init>
+  document.addEventListener('DOMContentLoaded', () => {
+    const app = Vue.createApp({
+      render(h) {
+        return Vue.h('div', [
+          Vue.h('div', `${this.count}`),
+          Vue.h('button', {
+            onClick: this.increment
+          }, 'Click me')
+        ]);
+      },
+      data() {
+        return {
+          count: 12,
+          message: 'Hello Vue!'
+        }
+      },
+      methods: {
+        increment() {
+          this.count++
+        }
+      }
+    });
+    app.mount('#app');
+    console.log('[[count]]', "DOIGN INIT")
+  });
+</script>
+
 {% endblock %}
 
-{% block title %}Components Library - CourtListener.com{% endblock %}
-
 {% block content %}
-<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">H1 Title Component</h1>
-<h2 class="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">H2 Title Component</h2>
-<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">H3 Title Component</h3>
 
-  {% component "calendar" date="2024-11-06" %}{% endcomponent %}
-  {% component "h1" inner="Test" %}{% endcomponent %}
+<div id="app"></div>
 {% endblock %}
