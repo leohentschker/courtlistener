@@ -6,12 +6,25 @@
 {% tailwind_css %}
 {% tailwind_preload_css %}
 
+<!-- To be replaced by self-hosted version -->
+<script src="{% static 'js/alpinejscsp@3.14.8.min.js' %}" defer init nonce="{{ request.csp_nonce }}"></script>
+<script nonce="{{ request.csp_nonce }}">
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('counter', () => ({
+          count: 0,
+          increment() {
+              this.count++
+          }
+      }))
+  })
+  </script>
+
 {% endblock %}
 
-{% block title %}Components Library - CourtListener.com{% endblock %}
-
 {% block content %}
-<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">H1 Title Component</h1>
-<h2 class="scroll-m-20 text-3xl font-semibold tracking-tight first:mt-0">H2 Title Component</h2>
-<h3 class="scroll-m-20 text-2xl font-semibold tracking-tight">H3 Title Component</h3>
+<div x-data="counter">
+  <button x-on:click="increment">Increment</button>
+
+  <span x-text="count"></span>
+</div>
 {% endblock %}
