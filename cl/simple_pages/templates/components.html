@@ -7,39 +7,24 @@
 {% tailwind_preload_css %}
 
 <!-- To be replaced by self-hosted version -->
-<script  src="{% static 'js/vue.runtime.global.prod.min.js' %}" defer init nonce="{{ request.csp_nonce }}"
-></script>
-<script nonce="{{ request.csp_nonce }}" defer init>
-  document.addEventListener('DOMContentLoaded', () => {
-    const app = Vue.createApp({
-      render(h) {
-        return Vue.h('div', [
-          Vue.h('div', `${this.count}`),
-          Vue.h('button', {
-            onClick: this.increment
-          }, 'Click me')
-        ]);
-      },
-      data() {
-        return {
-          count: 12,
-          message: 'Hello Vue!'
-        }
-      },
-      methods: {
-        increment() {
-          this.count++
-        }
-      }
-    });
-    app.mount('#app');
-    console.log('[[count]]', "DOIGN INIT")
-  });
-</script>
+<script src="{% static 'js/alpinejscsp@3.14.8.min.js' %}" defer init nonce="{{ request.csp_nonce }}"></script>
+<script nonce="{{ request.csp_nonce }}">
+  document.addEventListener('alpine:init', () => {
+      Alpine.data('counter', () => ({
+          count: 0,
+          increment() {
+              this.count++
+          }
+      }))
+  })
+  </script>
 
 {% endblock %}
 
 {% block content %}
+<div x-data="counter">
+  <button x-on:click="increment">Increment</button>
 
-<div id="app"></div>
+  <span x-text="count"></span>
+</div>
 {% endblock %}
